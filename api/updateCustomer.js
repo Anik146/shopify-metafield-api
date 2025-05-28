@@ -1,3 +1,24 @@
+export default async function handler(req, res) {
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', 'https://uf1h70-bn.myshopify.com');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight request
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  // Your existing logic below...
+  const { customerId, dob, gender } = req.body;
+
+  if (!customerId || !dob || !gender) {
+    return res.status(400).json({ success: false, error: 'Missing required fields' });
+  }
+
+  // ... continue with Shopify API call
+}
+
 // File: api/updateCustomer.js
 
 export default async function handler(req, res) {
